@@ -1,0 +1,16 @@
+{
+	"name": "takethel1337",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "node init.js"
+	},
+	"dependencies": {
+    
+	},
+	"devDependencies": {
+		
+	},
+	"engines": {
+		"node": ">=10.5.0"
+	}
+}
