@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Join a Game
+    </title>
+    <style>
+      /*#game, #login{
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        background-color: red;
+        animation-name: example;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+      @keyframes example {
+        0%   {background-color: red;}
+        33%  {background-color: yellow;}
+        66%  {background-color: blue;}
+        100%   {background-color: red;}
+      }
+      }*/
+      #game, #lc {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        background-color: #45a3e5;
+        animation: bgcolor 10s infinite;
+        animation-direction: alternate;
+      }
+      @keyframes bgcolor {
+        0% {
+          background-color: #45a3e5
+        }
+    
+        30% {
+          background-color: #66bf39
+        }
+    
+        60% {
+          background-color: #eb670f
+        }
+    
+        90% {
+          background-color: #f35
+        }
+    
+        100% {
+          background-color: #864cbf
+        }
+      }
+      #game {
+        display: block;
+      }
+      #login {
+        
+      }
+      #lc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: display 10s;
+      }
+      input#li {
+        /*display: flex;
+        justify-content: center;
+        align-items: center;*/
+        text-align: center;
+        width: 223px;
+        height: 16px;
+      }
+      input#li2 {
+        /*display: flex;
+        justify-content: center;
+        align-items: center;*/
+        text-align: center;
+        width: 223px;
+        height: 16px;
+      }
+      #login > button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 231px;
+      }
+    </style>
+    <script>
+      window.onload=()=>{
+        game=document.querySelector('#game');
+        login=document.querySelector('#login');
+        joinBtn=login.querySelector('button');
+        joinTxt=login.querySelector('input#li');
+        joinTxt2=login.querySelector('input#li2');
+        joinBtn.onclick=()=>{
+          gamecode=joinTxt.value;
+          username=joinTxt2.value;
+          j=new XMLHttpRequest();
+          j.open('GET',gamecode+'.quiz.html?'+username);
+          j.onload=()=>{
+            if(username.length<4){
+              alert('Your username is too short.');
+              return;
+            }
+            if(j.status==404){
+              alert('That is not a valid game code.');
+              return;
+            }
+            p=j.responseText;
+            pr=p.split(';');
+            questions=atob(pr[0]).split(',');
+            answers1=atob(pr[1]).split(',');
+            answers2=atob(pr[2]).split(',');
+            answers3=atob(pr[3]).split(',');
+            answers4=atob(pr[4]).split(',');
+            correctanswer=atob(pr[5]).split(',');
+            i=0;
+            pre=i=>{
+              game.innerHTML=questions[i];
+              game.innerHTML+='<br><button class=a id=1>'+answers1[i]+'</button>';
+              game.innerHTML+='<br><button class=a id=2>'+answers2[i]+'</button>';
+              game.innerHTML+='<br><button class=a id=3>'+answers3[i]+'</button>';
+              game.innerHTML+='<br><button class=a id=4>'+answers4[i]+'</button>';
+              document.querySelectorAll('.a').forEach(e=>{
+                e.onclick=()=>{
+                  answer=e.id;
+                  game.innerHTML='';
+                };
+              });
+              setTimeout(i=>{
+                if(parseInt(answer)==correctanswer[i]){
+                  game.innerHTML='Correct!';
+                } else {
+                  game.innerHTML='Incorrect!';
+                }
+              },60000,i);
+              i++;
+              if(questions[i]){
+                setTimeout(pre,70000,i);
+              }
+            }
+            pre(i);
+            login.parentElement.style.display="none";
+            //login.style.display="none";
+          };
+          j.send();
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id=game>
+      
+    </div>
+    <div id=lc>
+      <div id=login>
+        <input type="text" id='li' placeholder="Game ID" maxlength=30 />
+        <br>
+        <input type="text" id='li2' placeholder="Username" maxlength=30 />
+        <br>
+        <button>
+          Join!
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

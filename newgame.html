@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      New Game
+    </title>
+    <script>
+      window.onload=()=>{
+        questions=[];
+        answers1=[];
+        answers2=[];
+        answers3=[];
+        answers4=[];
+        correctanswers=[];
+        g=()=>{
+          output='';
+          output+=btoa(questions.join(','))+';';
+          output+=btoa(answers1.join(','))+';';
+          output+=btoa(answers2.join(','))+';';
+          output+=btoa(answers3.join(','))+';';
+          output+=btoa(answers4.join(','))+';';
+          output+=btoa(correctanswers.join(','));
+          window.location='/special.html?'+output;
+        }
+        i=0;
+        while(true){
+          document.write('Question '+i+': '+'<br>');
+          questions.push(prompt('Question:'));
+          document.write(questions[questions.length-1]+'<br>');
+          answers1.push(prompt('Answer 1:'));
+          document.write(answers1[answers1.length-1]+'<br>');
+          answers2.push(prompt('Answer 2:'));
+          document.write(answers2[answers2.length-1]+'<br>');
+          answers3.push(prompt('Answer 3:'));
+          document.write(answers3[answers3.length-1]+'<br>');
+          answers4.push(prompt('Answer 4:'));
+          document.write(answers4[answers4.length-1]+'<br>');
+          correctanswers.push(prompt('Correct Answer(number):'));
+          document.write(correctanswers[correctanswers.length-1]+'<br>');
+          if(prompt('Enter "done" to exit.')=='done'){
+            break;
+          }
+          document.write(''+'<br>');
+          i++;
+        }
+        g();
+      }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

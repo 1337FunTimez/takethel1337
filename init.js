@@ -1,0 +1,1 @@
+spawn('python', ['maij=n.py', process.env.PORT]);
