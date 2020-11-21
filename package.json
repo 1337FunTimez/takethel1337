@@ -2,7 +2,7 @@
 	"name": "takethel1337",
 	"version": "1.0.0",
 	"scripts": {
-		"start": "node init.js"
+		"start": "python3 main.py $PORT"
 	},
 	"dependencies": {
     
