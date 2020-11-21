@@ -50,7 +50,7 @@ class BasicHTTPRequestHandler(BaseHTTPRequestHandler):
         else:
             self.wfile.write(open(path[0],'rb').read())
 
-s=HTTPServer(('',sys.argv[2]),BasicHTTPRequestHandler);
+s=HTTPServer(('',sys.argv[1]),BasicHTTPRequestHandler);
 try:
     s.serve_forever();
 except KeyboardInterrupt:
